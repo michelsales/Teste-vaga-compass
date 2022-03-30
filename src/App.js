@@ -1,19 +1,19 @@
-import { useReducer, useState, useEffect, useContext, createContext } from 'react';
+import { useReducer, useEffect } from 'react';
 
 import { GlobalStyles} from './styles/GlobalStyles';
 import { Container, Wrapper, Button} from  './styles.js';
 
-import Routes from './Routes';
+import Routes from './services/Routes';
 
 import { initialState, GithubReducer, ContextReducer } from './reducer/GithubReducer';
 
-import {supabase} from './client';
+import {supabase} from './services/client';
 
+import { BsGithub } from 'react-icons/bs';
 
 
 function App() {
   const [state, dispatch] = useReducer(GithubReducer, initialState);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     checkUser();
@@ -24,7 +24,14 @@ function App() {
 
   async function checkUser(){
     const user = supabase.auth.user();
-    setUser(user);
+   
+    dispatch({
+      type: 'SET_LOGGED',
+      payload: {
+        logged: true,
+        infos: user,
+      },
+    })
   }
 
   async function signInWithGithub() {
@@ -34,7 +41,7 @@ function App() {
   }
   
 
-  if(user){
+  if(state.userLogged.logged === true){
     return (  
       <ContextReducer.Provider value={{state, dispatch}}>
         <GlobalStyles />
@@ -46,8 +53,9 @@ function App() {
       <Container>
         <GlobalStyles />
         <Wrapper>
-          <h3>Olá, autentique-se com o Github para acessar o App</h3>
-          <Button onClick={signInWithGithub}>Logar-se com o Github</Button>
+          <h2>Login:</h2>
+          <h3>Olá, autentique-se com o Github para acessar o App do teste</h3>
+          <Button onClick={signInWithGithub}>Logar-se com<BsGithub/> </Button>
         </Wrapper>
       </Container>
     )

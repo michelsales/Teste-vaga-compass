@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ContextReducer } from '../../reducer/GithubReducer';
 
@@ -6,7 +6,7 @@ import { Container, ContainerUser, ButtonMore } from './styles';
 import { BiSad, BiHappy } from 'react-icons/bi'; 
 
 function FirstResult() {
-  const { state, dispatch } = useContext(ContextReducer);
+  const { state } = useContext(ContextReducer);
 
   const renderMessage = () => {
       if(state.user.message === 'Not Found' || state.user.login){
@@ -38,7 +38,7 @@ function FirstResult() {
           <Link to={`/${state.user.login}`}><ButtonMore>Mais detalhes</ButtonMore></Link>
         </ContainerUser>
       )
-    }
+    } 
   }
 
   return(
