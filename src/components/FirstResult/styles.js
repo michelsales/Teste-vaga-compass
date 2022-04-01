@@ -43,4 +43,5 @@ export const ButtonMore = styled.button`
     border: 0;
     border-radius: 20px;
     margin-top: 15px;
+    font-weight: bold;
 `

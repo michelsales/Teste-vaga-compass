@@ -9,8 +9,7 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    margin-top: 15px;
-    margin-left: 30px;
+    margin: 15px 0px 0px 30px;
     padding: 10px;
 
     svg { 

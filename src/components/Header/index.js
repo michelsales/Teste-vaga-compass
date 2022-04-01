@@ -1,9 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
-import { Container, ButtonSearch, Button } from './styles';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { BsGithub } from 'react-icons/bs';
+import { ImHome } from 'react-icons/im';
+
 import {ContextReducer} from '../../reducer/GithubReducer';
 import { Link } from 'react-router-dom';
+import { Container, ButtonSearch, Button, WrapperLogged, ContentLeft, WrapperSearch } from './styles';
 
 function Header() {
   const { state, dispatch } = useContext(ContextReducer);
@@ -16,7 +19,6 @@ const SearchUser = () => {
         payload: []
     })
   }
-
     fetch(`https://api.github.com/users/${user}`)
     .then(response => response.json())
     .then(data => {
@@ -35,6 +37,16 @@ const handleZeroinUser = () => {
   })
 }
 
+const handleUserLogout = () => {
+  dispatch({
+    type: 'SET_LOGGED',
+    payload: {
+      logged: false,
+      infos: [],
+    },
+  })
+}
+
 const renderSearch = () => {
     if(window.location.pathname === '/'){
       return(
@@ -44,16 +56,46 @@ const renderSearch = () => {
       return(
         <>
           <Link to={`/${user}`}><ButtonSearch onClick={SearchUser}><AiOutlineSearch /></ButtonSearch></Link>
-          <Link to="/"><Button onClick={handleZeroinUser}>ir para Home</Button></Link>
+          <Link to="/"><Button onClick={handleZeroinUser}><ImHome /></Button></Link>
         </>
       )
     }
 }
 
+const renderLeftSide = () => {
+  if(state?.userLogged?.infos?.user_metadata?.name){
+    return(
+        <ContentLeft>
+          <WrapperLogged>
+            <BsGithub />
+            <span>{state?.userLogged?.infos?.user_metadata?.name}</span>
+          </WrapperLogged>
+          <h5 onClick={handleUserLogout}>Deslogar</h5>
+        </ContentLeft>
+    );
+  } else { 
+    return(
+      <ContentLeft>
+          <h4>Carregando Infos do usuário...</h4>
+      </ContentLeft>
+    )
+  }
+}
+
+
+const renderBlockSearch = () => {
+  return(
+    <WrapperSearch>
+      <input type="text"  onChange={(e) => setUser(e.target.value)} value={user} placeholder="Escreva o nome do usuário" />
+      {renderSearch()}
+    </WrapperSearch>
+  );
+}
+
   return(
       <Container>
-          <input type="text"  onChange={(e) => setUser(e.target.value)} value={user} placeholder="Escreva o nome do usuário" />
-          {renderSearch()} 
+          {renderLeftSide()}
+          {renderBlockSearch()}
       </Container>
   );
 }

@@ -34,9 +34,9 @@ export const WrapperInfos = styled.div`
 `
 
 export const WrapperLeft = styled.div`
-    width: auto;
+    width: 400px;
+    max-width: 400px;
     height: auto;
-    max-width: 20%;
     border: 1px solid #dfdfdf; 
     border-radius: 10px;
     display: flex;
@@ -48,6 +48,7 @@ export const WrapperLeft = styled.div`
 
     img{ 
         width: 50%;
+        min-width: 50%;
         border-radius: 50%;
         margin-top: 20px;
     }
@@ -70,8 +71,7 @@ export const WrapperRight = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 40px;
-    margin-top: 17px;
+    margin: 17px 0 40px 0;
 
     svg {
         height: 30px;
@@ -155,6 +155,7 @@ export const ButtonRepositories = styled.button`
     border-radius: 10px;
     color: var(--white);
     margin-top: 10px;
+    font-weight: bold;
     
     &:hover {
         transition: ease-in-out 0.5s;
@@ -168,6 +169,7 @@ export const ButtonStarred = styled.button`
     border-radius: 10px;
     color: var(--white);
     margin-top: 10px;
+    font-weight: bold;
 
     &:hover {
         transition: ease-in-out 0.5s;

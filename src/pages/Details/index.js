@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import Header from '../../components/Header';
 
@@ -94,7 +94,6 @@ const renderLeftSide = () => {
   }
 
   const renderInfos = () => {
-    console.log('michel', state.user); 
       if(state.user.message === 'Not Found'){
         return(
           <Warning>
