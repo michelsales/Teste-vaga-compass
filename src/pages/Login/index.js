@@ -14,7 +14,7 @@ export default function Login() {
     const { dispatch } = useContext(ContextReducer);
 
     useEffect(() => {
-        checkUser();
+        //checkUser();
         window.addEventListener('hashchange', function() {
           checkUser();
         })

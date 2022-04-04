@@ -22,7 +22,10 @@ function App() {
       )
     }else { 
       return(
-        <Login /> 
+        <>
+          <GlobalStyles />
+          <Login /> 
+        </>
       )
     }
   }
