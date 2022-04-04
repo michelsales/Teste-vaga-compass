@@ -16,11 +16,11 @@ function App() {
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
   useEffect(() => {
-    checkUser();
+    //checkUser();
     window.addEventListener('hashchange', function() {
       checkUser();
     })
-  }, [])
+  },[]);
 
   async function checkUser(){
     const user = supabase.auth.user();
@@ -44,6 +44,7 @@ function App() {
   if(state.userLogged.logged === true){
     return (  
       <ContextReducer.Provider value={{state, dispatch}}>
+        {console.log(state.userLogged)}
         <GlobalStyles />
         <Routes />
       </ContextReducer.Provider>
