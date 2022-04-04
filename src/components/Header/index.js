@@ -94,6 +94,7 @@ const renderBlockSearch = () => {
 
   return(
       <Container>
+          {console.log(state.userLogged)}
           {renderLeftSide()}
           {renderBlockSearch()}
       </Container>
